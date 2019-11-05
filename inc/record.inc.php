@@ -1111,7 +1111,8 @@ function get_best_matching_zone_id_from_name($domain) {
     }
     if ($response) {
         while ($r = $response->fetchRow()) {
-            $pos = stripos($domain, $r["name"]);
+	    // prepend '.' to force complete zone match
+            $pos = stripos($domain, "." . $r["name"]);
             if ($pos !== false) {
                 // one possible searched $domain is found
                 if ($pos < $match) {
